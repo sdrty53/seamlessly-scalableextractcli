@@ -1,9 +1,8 @@
-function canJump(nums) {
-  let maxJump = 0;
-  for (let i = 0; i < nums.length; i++) {
-    if (i > maxJump) return false;
-    maxJump = Math.max(maxJump, i + nums[i]);
-    if (maxJump >= nums.length - 1) return true;
-  }
-  return false;
+function sortedArrayToBST(nums) {
+  if (nums.length === 0) return null;
+  const mid = Math.floor(nums.length / 2);
+  const root = new TreeNode(nums[mid]);
+  root.left = sortedArrayToBST(nums.slice(0, mid));
+  root.right = sortedArrayToBST(nums.slice(mid + 1));
+  return root;
 }
