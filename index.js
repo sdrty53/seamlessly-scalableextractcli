@@ -1,21 +1,21 @@
-function addTwoNumbers(l1, l2) {
-  const dummy = new ListNode(0);
-  let p = l1,
-    q = l2,
-    curr = dummy;
-  let carry = 0;
-  while (p !== null || q !== null) {
-    const x = p !== null ? p.val : 0;
-    const y = q !== null ? q.val : 0;
-    const sum = x + y + carry;
-    carry = Math.floor(sum / 10);
-    curr.next = new ListNode(sum % 10);
-    curr = curr.next;
-    if (p !== null) p = p.next;
-    if (q !== null) q = q.next;
+const combSort = (arr) => {
+  const shrinkFactor = 1.3;
+  let gap = arr.length;
+  let swapped = true;
+  while (gap > 1 || swapped) {
+    gap = Math.floor(gap / shrinkFactor);
+    if (gap < 1) {
+      gap = 1;
+    }
+    swapped = false;
+    let i = 0;
+    while (i + gap < arr.length) {
+      if (arr[i] > arr[i + gap]) {
+        [arr[i], arr[i + gap]] = [arr[i + gap], arr[i]];
+        swapped = true;
+      }
+      i++;
+    }
   }
-  if (carry > 0) {
-    curr.next = new ListNode(carry);
-  }
-  return dummy.next;
-}
+  return arr;
+};
